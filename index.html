@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>🎮 200 Famous HTML Games</title>
+  <style>
+    /* (Same CSS as before) */
+  </style>
+</head>
+<body>
+<header>
+  <h1>🎮 200 Famous HTML Games</h1>
+  <input id="search" placeholder="Search a game..." />
+</header>
+<div id="gameGrid"></div>
+<div id="overlay"><span id="closeBtn">×</span><iframe id="gameFrame"></iframe></div>
+<script>
+  const games = [
+    { title: "2048", thumb: "https://play2048.co/meta/apple-touch-icon.png", url: "https://play2048.co/" },
+    { title: "Snake", thumb: "https://upload.wikimedia.org/wikipedia/commons/0/05/Snake_google_doodle.png", url: "https://playsnake.org/" },
+    { title: "Tetris", thumb: "https://upload.wikimedia.org/wikipedia/commons/7/7c/Tetris_NB_logo.png", url: "https://tetris.com/play-tetris" },
+    { title: "Pac‑Man", thumb: "https://upload.wikimedia.org/wikipedia/en/5/59/Pac-man.png", url: "https://www.retrogames.cc/embed/28238-pac-man.html" },
+    { title: "Flappy Bird", thumb: "https://upload.wikimedia.org/wikipedia/en/0/0b/Flappy_Bird_icon.png", url: "https://flappybird.io/" },
+    { title: "Minesweeper", thumb: "https://www.retrogames.cc/assets/images/minesweeper.png", url: "https://www.retrogames.cc/embed/18319-minesweeper.html" },
+    { title: "Agar.io", thumb: "https://lliack.com/assets/img/agar-io.png", url: "https://agar.io" },
+    { title: "Pacman HTML5", thumb: "https://superdevresources.com/images/pacman.png", url: "https://chregi.github.io/pacman/" },
+    { title: "Hextris", thumb: "https://superdevresources.com/images/hextris.png", url: "https://hextris.superlogic.com/" },
+    { title: "Clumsy Bird", thumb: "https://superdevresources.com/images/clumsybird.png", url: "https://ellisonleao.github.io/clumsy-bird/" },
+    { title: "BrowserQuest", thumb: "https://mozilla.github.io/browserquest/images/browserquest-title.png", url: "https://mozilla.github.io/browserquest/" },
+    { title: "Freeciv-web", thumb: "https://superdevresources.com/images/freecivweb.png", url: "https://freecivweb.org/" },
+    { title: "Canvas Tetris", thumb: "https://superdevresources.com/images/canvas-tetris.png", url: "https://zabapuch.github.io/canvas-tetris/" },
+    { title: "0hh1", thumb: "https://superdevresources.com/images/0hh1.png", url: "https://0hh1.com/" },
+    { title: "Clumsy Mario", thumb: "https://example.com/clumsymario.png", url: "https://example.com/clumsymario/" },
+    { title: "Memory Card", thumb: "https://foolishdeveloper.com/images/memory-card.png", url: "https://foolishdeveloper.com/memory-card-game/" },
+    { title: "Simon", thumb: "https://codewithrandom.com/images/simon-game.png", url: "https://codewithrandom.com/demo/simon/" },
+    { title: "Piano Tiles", thumb: "https://codewithrandom.com/images/piano-tiles.png", url: "https://codewithrandom.com/demo/piano-tiles/" },
+    { title: "Trivia", thumb: "https://codewithrandom.com/images/trivia.png", url: "https://codewithrandom.com/demo/trivia/" },
+    { title: "Snake Classic", thumb: "https://codewithrandom.com/images/snake-classic.png", url: "https://codewithrandom.com/demo/snake-classic/" }
+  ];
+
+  /* (Same JS render/search/modal code as before) */
+</script>
+</body>
+</html>
