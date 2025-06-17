@@ -1,45 +1,368 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>🎮 200 Famous HTML Games</title>
-  <style>
-    /* (Same CSS as before) */
-  </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Cousin's Game Hub — 50 Games!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="https://i.imgur.com/your-game-icon.png" type="image/png"> <style>
+        :root {
+            --primary-bg: #1a1a2e;
+            --secondary-bg: #16213e;
+            --card-bg: #0f3460;
+            --text-color: #e0e0e0;
+            --accent-color: #e94560;
+            --border-radius: 10px;
+            --shadow: rgba(0, 0, 0, 0.3);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--primary-bg);
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* Custom Scrollbar for WebKit Browsers */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--secondary-bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-color);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #d43450;
+        }
+
+        h1 {
+            background: var(--secondary-bg);
+            color: var(--accent-color);
+            padding: 1.5rem 1rem;
+            margin: 0;
+            font-size: 2.5rem;
+            box-shadow: 0 4px 8px var(--shadow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        h1 .icon {
+            font-size: 2.8rem;
+        }
+
+        #searchBar {
+            width: 90%;
+            max-width: 500px;
+            padding: 12px 20px;
+            margin: 30px auto;
+            font-size: 1.1rem;
+            border: 2px solid var(--card-bg);
+            border-radius: var(--border-radius);
+            background: var(--secondary-bg);
+            color: var(--text-color);
+            outline: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px var(--shadow);
+        }
+
+        #searchBar::placeholder {
+            color: #bbb;
+        }
+
+        #searchBar:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 15px rgba(233, 69, 96, 0.5);
+            background: #253150;
+        }
+
+        .games {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 25px;
+            padding: 25px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .game {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 15px;
+            box-shadow: 0 4px 10px var(--shadow);
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .game:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 8px 20px rgba(233, 69, 96, 0.4);
+        }
+
+        .game img {
+            width: 100%;
+            height: 130px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border: 2px solid var(--accent-color);
+        }
+
+        .game h2 {
+            font-size: 1.1rem;
+            margin: 0;
+            color: var(--text-color);
+            text-align: center;
+            font-weight: 600;
+        }
+
+        #iframeContainer {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 999;
+            animation: fadeIn 0.3s ease-out forwards;
+        }
+
+        #iframeContainer.hide {
+            animation: fadeOut 0.3s ease-in forwards;
+        }
+
+        iframe {
+            width: 100vw;
+            height: 100vh;
+            border: none;
+            display: block;
+        }
+
+        #closeBtn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--accent-color);
+            color: white;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 1000;
+            transition: background 0.2s ease, transform 0.2s ease;
+            box-shadow: 0 2px 5px var(--shadow);
+        }
+
+        #closeBtn:hover {
+            background: #d43450;
+            transform: scale(1.05);
+        }
+
+        footer {
+            padding: 2rem;
+            font-size: 0.9rem;
+            color: #999;
+            margin-top: 40px;
+            background: var(--secondary-bg);
+            box-shadow: 0 -2px 5px var(--shadow);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+                padding: 1rem;
+            }
+            h1 .icon {
+                font-size: 2.2rem;
+            }
+            #searchBar {
+                font-size: 1rem;
+                padding: 10px 15px;
+            }
+            .games {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 15px;
+                padding: 15px;
+            }
+            .game {
+                padding: 10px;
+            }
+            .game img {
+                height: 100px;
+            }
+            .game h2 {
+                font-size: 1rem;
+            }
+            #closeBtn {
+                font-size: 1rem;
+                padding: 8px 15px;
+                top: 15px;
+                right: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            h1 .icon {
+                font-size: 2rem;
+            }
+            #searchBar {
+                margin: 20px auto;
+            }
+            .games {
+                grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+                gap: 10px;
+                padding: 10px;
+            }
+            .game img {
+                height: 80px;
+            }
+            .game h2 {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
 </head>
 <body>
-<header>
-  <h1>🎮 200 Famous HTML Games</h1>
-  <input id="search" placeholder="Search a game..." />
-</header>
-<div id="gameGrid"></div>
-<div id="overlay"><span id="closeBtn">×</span><iframe id="gameFrame"></iframe></div>
-<script>
-  const games = [
-    { title: "2048", thumb: "https://play2048.co/meta/apple-touch-icon.png", url: "https://play2048.co/" },
-    { title: "Snake", thumb: "https://upload.wikimedia.org/wikipedia/commons/0/05/Snake_google_doodle.png", url: "https://playsnake.org/" },
-    { title: "Tetris", thumb: "https://upload.wikimedia.org/wikipedia/commons/7/7c/Tetris_NB_logo.png", url: "https://tetris.com/play-tetris" },
-    { title: "Pac‑Man", thumb: "https://upload.wikimedia.org/wikipedia/en/5/59/Pac-man.png", url: "https://www.retrogames.cc/embed/28238-pac-man.html" },
-    { title: "Flappy Bird", thumb: "https://upload.wikimedia.org/wikipedia/en/0/0b/Flappy_Bird_icon.png", url: "https://flappybird.io/" },
-    { title: "Minesweeper", thumb: "https://www.retrogames.cc/assets/images/minesweeper.png", url: "https://www.retrogames.cc/embed/18319-minesweeper.html" },
-    { title: "Agar.io", thumb: "https://lliack.com/assets/img/agar-io.png", url: "https://agar.io" },
-    { title: "Pacman HTML5", thumb: "https://superdevresources.com/images/pacman.png", url: "https://chregi.github.io/pacman/" },
-    { title: "Hextris", thumb: "https://superdevresources.com/images/hextris.png", url: "https://hextris.superlogic.com/" },
-    { title: "Clumsy Bird", thumb: "https://superdevresources.com/images/clumsybird.png", url: "https://ellisonleao.github.io/clumsy-bird/" },
-    { title: "BrowserQuest", thumb: "https://mozilla.github.io/browserquest/images/browserquest-title.png", url: "https://mozilla.github.io/browserquest/" },
-    { title: "Freeciv-web", thumb: "https://superdevresources.com/images/freecivweb.png", url: "https://freecivweb.org/" },
-    { title: "Canvas Tetris", thumb: "https://superdevresources.com/images/canvas-tetris.png", url: "https://zabapuch.github.io/canvas-tetris/" },
-    { title: "0hh1", thumb: "https://superdevresources.com/images/0hh1.png", url: "https://0hh1.com/" },
-    { title: "Clumsy Mario", thumb: "https://example.com/clumsymario.png", url: "https://example.com/clumsymario/" },
-    { title: "Memory Card", thumb: "https://foolishdeveloper.com/images/memory-card.png", url: "https://foolishdeveloper.com/memory-card-game/" },
-    { title: "Simon", thumb: "https://codewithrandom.com/images/simon-game.png", url: "https://codewithrandom.com/demo/simon/" },
-    { title: "Piano Tiles", thumb: "https://codewithrandom.com/images/piano-tiles.png", url: "https://codewithrandom.com/demo/piano-tiles/" },
-    { title: "Trivia", thumb: "https://codewithrandom.com/images/trivia.png", url: "https://codewithrandom.com/demo/trivia/" },
-    { title: "Snake Classic", thumb: "https://codewithrandom.com/images/snake-classic.png", url: "https://codewithrandom.com/demo/snake-classic/" }
-  ];
+    <h1><span class="icon">🎮</span> Game Hub <span class="icon">👾</span></h1>
+    <input type="text" id="searchBar" placeholder="Search for your favorite games...">
+    <div class="games" id="gamesContainer"></div>
 
-  /* (Same JS render/search/modal code as before) */
-</script>
+    <div id="iframeContainer">
+        <button id="closeBtn">✖ Close Game</button>
+        <iframe id="gameFrame" allowfullscreen></iframe>
+    </div>
+
+    <footer>Made with ❤️ by a 10‑year‑old tech brainiac for his cousin!</footer>
+
+    <script>
+        const games = [
+            { title: "Slope 2", img: "https://2slope.github.io/images/slope2.png", url: "https://2slope.github.io/" },
+            { title: "Italian Brainrot Clicker", img: "https://i.imgur.com/lRSFa8A.png", url: "https://italianbrainrotclicker.pages.dev/" },
+            { title: "2048", img: "https://i.imgur.com/nAmNZZp.png", url: "https://play2048.co/" },
+            { title: "Flappy Bird", img: "https://i.imgur.com/zIBqVYF.png", url: "https://flappybird.io/" },
+            { title: "Snake", img: "https://i.imgur.com/YbXnKfL.png", url: "https://playsnake.org/" },
+            { title: "Tetris", img: "https://i.imgur.com/f6RsdZI.png", url: "https://tetris.com/play-tetris" },
+            { title: "Pac-Man", img: "https://i.imgur.com/hMmDhqz.png", url: "https://www.retrogames.cc/embed/18784-pac-man-1980-atari-2600.html" },
+            { title: "Minesweeper", img: "https://i.imgur.com/5bGzZi7.png", url: "https://minesweeper.online/" },
+            { title: "Crossy Road", img: "https://i.imgur.com/LKHn3PS.png", url: "https://crossyroad.io/" },
+            { title: "Basketball Stars", img: "https://i.imgur.com/OSXEO9N.png", url: "https://ubg77.github.io/game131022/basket-random/" },
+            { title: "Run 3", img: "https://i.imgur.com/MfK9qNR.png", url: "https://ubg77.github.io/game131022/run-3/" },
+            { title: "1v1.LOL", img: "https://i.imgur.com/XfQ3LRb.png", url: "https://1v1.lol" },
+            { title: "Moto X3M", img: "https://i.imgur.com/q8AhMeH.png", url: "https://ubg77.github.io/game131022/moto-x3m/" },
+            { title: "Slope Ball", img: "https://i.imgur.com/fNAnZ9F.png", url: "https://slopeball.io/" },
+            { title: "Cookie Clicker", img: "https://i.imgur.com/vkrc60H.png", url: "https://orteil.dashnet.org/cookieclicker/" },
+            { title: "World's Hardest Game", img: "https://i.imgur.com/18iN1Wr.png", url: "https://ubg77.github.io/game131022/worlds-hardest-game/" },
+            { title: "Minecraft Classic", img: "https://i.imgur.com/zp2YoGq.png", url: "https://classic.minecraft.net/" },
+            { title: "Dino Game", img: "https://i.imgur.com/qAfZnBa.png", url: "https://chromedino.com/" },
+            { title: "Shell Shockers", img: "https://i.imgur.com/MnUkFSW.png", url: "https://shellshock.io/" },
+            { title: "Vex 7", img: "https://i.imgur.com/DpWI4Az.png", url: "https://ubg77.github.io/game131022/vex7/" },
+            { title: "Geometry Dash", img: "https://i.imgur.com/vv9zBJP.png", url: "https://ubg77.github.io/game131022/geometry-dash/" },
+            { title: "Getting Over It", img: "https://i.imgur.com/tmbrZ8q.png", url: "https://ubg77.github.io/game131022/getting-over-it/" },
+            { title: "Snow Rider 3D", img: "https://i.imgur.com/MlzHyZX.png", url: "https://ubg77.github.io/game131022/snow-rider-3d/" },
+            { title: "Hextris", img: "https://i.imgur.com/hextris.png", url: "https://hextris.superlogic.com/" },
+            { title: "Clumsy Bird", img: "https://i.imgur.com/clumsybird.png", url: "https://ellisonleao.github.io/clumsy-bird/" },
+            { title: "Freeciv-web", img: "https://i.imgur.com/freeciv.png", url: "https://freecivweb.org/" },
+            { title: "BrowserQuest", img: "https://i.imgur.com/browserquest.png", url: "https://mozilla.github.io/browserquest/" },
+            { title: "Pacman HTML5", img: "https://i.imgur.com/pacmanhtml5.png", url: "https://chregi.github.io/pacman/" },
+            { title: "Canvas Tetris", img: "https://i.imgur.com/canvastetris.png", url: "https://zabapuch.github.io/canvas-tetris/" },
+            { title: "0hh1", img: "https://i.imgur.com/0hh1.png", url: "https://0hh1.com/" },
+            { title: "Simon", img: "https://i.imgur.com/simon.png", url: "https://codewithrandom.com/demo/simon/" },
+            { title: "Piano Tiles", img: "https://i.imgur.com/pianotiles.png", url: "https://codewithrandom.com/demo/piano-tiles/" },
+            { title: "Memory Card", img: "https://i.imgur.com/memorycard.png", url: "https://foolishdeveloper.com/memory-card-game/" },
+            { title: "HexGL", img: "https://i.imgur.com/hexgl.png", url: "https://hexgl.bkcore.com/" },
+            { title: "QWOP", img: "https://i.imgur.com/qwop.png", url: "http://www.foddy.net/Athletics.html" },
+            { title: "Agar.io", img: "https://i.imgur.com/agario.png", url: "https://agar.io" },
+            { title: "Slither.io", img: "https://i.imgur.com/slitherio.png", url: "https://slither.io/" },
+            { title: "Paper.io 2", img: "https://i.imgur.com/paperio2.png", url: "https://paper-io.com/paper-io-2/" },
+            { title: "Diep.io", img: "https://i.imgur.com/diepio.png", url: "https://diep.io/" },
+            { title: "Krunker.io", img: "https://i.imgur.com/3BZzAWp.png", url: "https://krunker.io/" },
+            { title: "Zombs Royale", img: "https://i.imgur.com/SVVG5aM.png", url: "https://zombsroyale.io/" },
+            { title: "Bonk.io", img: "https://i.imgur.com/bonkio.png", url: "https://bonk.io/" },
+            { title: "Shell Shockers", img: "https://i.imgur.com/shockers.png", url: "https://shellshock.io/" },
+            { title: "Paper.io", img: "https://i.imgur.com/paperio.png", url: "https://paper-io.com/" },
+            { title: "Curve Fever", img: "https://i.imgur.com/curvefever.png", url: "https://curvefever.pro/" },
+            { title: "Superhex.io", img: "https://i.imgur.com/superhex.png", url: "https://superhex.io/" },
+            { title: "Wings.io", img: "https://i.imgur.com/wingsio.png", url: "https://wings.io/" },
+            { title: "Linerider", img: "https://i.imgur.com/linerider.png", url: "https://kriss-mod.dri.ee/linerider/" },
+            { title: "Tank Trouble", img: "https://i.imgur.com/tanktrouble.png", url: "https://tanktrouble2.com/" },
+            { title: "Fireboy & Watergirl", img: "https://i.imgur.com/hLUdErh.png", url: "https://poki.com/en/g/fireboy-and-watergirl-forest-temple" },
+            { title: "Helix Jump", img: "https://i.imgur.com/DzJ7uDE.png", url: "https://helixjump.io/" },
+            { title: "Slope Run", img: "https://i.imgur.com/sloperun.png", url: "https://slope.run/" },
+            { title: "Blob Tower Defense", img: "https://i.imgur.com/blobtd.png", url: "https://blobtowerdefense.net/" }
+        ];
+
+        // Render and embed logic
+        const gc = document.getElementById("gamesContainer");
+        const sb = document.getElementById("searchBar");
+        const ic = document.getElementById("iframeContainer");
+        const gf = document.getElementById("gameFrame");
+        const cb = document.getElementById("closeBtn");
+
+        function render(filter = "") {
+            gc.innerHTML = "";
+            const filteredGames = games.filter(g => g.title.toLowerCase().includes(filter.toLowerCase()));
+
+            if (filteredGames.length === 0) {
+                gc.innerHTML = "<p style='color: #aaa; font-size: 1.2rem; margin-top: 50px;'>No games found matching your search.</p>";
+                return;
+            }
+
+            filteredGames.forEach(g => {
+                const div = document.createElement("div");
+                div.className = "game";
+                div.innerHTML = `<img src="${g.img}" alt="${g.title}"><h2>${g.title}</h2>`;
+                div.onclick = () => {
+                    gf.src = g.url;
+                    ic.style.display = "block";
+                    document.body.style.overflow = "hidden"; // Prevent scrolling when iframe is open
+                };
+                gc.appendChild(div);
+            });
+        }
+
+        cb.onclick = () => {
+            ic.classList.add('hide'); // Add hide class for fade-out
+            ic.addEventListener('animationend', function handler() {
+                ic.style.display = "none";
+                gf.src = ""; // Clear iframe source
+                ic.classList.remove('hide'); // Remove hide class
+                ic.removeEventListener('animationend', handler);
+            });
+            document.body.style.overflow = "auto"; // Allow scrolling again
+        };
+
+        sb.oninput = () => render(sb.value);
+        render(); // Initial render
+    </script>
 </body>
 </html>
